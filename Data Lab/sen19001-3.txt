@@ -1,0 +1,479 @@
+
+CS:APP Data Lab: Grading Sheet for sen19001.c
+
+Part 0: Compilation Results for Correctness Score
+
+Results of running 'dlc -z bits.c':
+Results of compiling btest:
+gcc -O -Wall -m32 -o btest bits.c btest.c decl.c tests.c
+
+
+Part 1: Correctness Tests (functions with invalid operations are disabled)
+
+Results of running 'btest -g':
+Team: sen19001+bau15011+jam18007
+Member 1:	Ezra	sen19001
+Member 2:	Thomas+Dawson	jam18007+bau15011
+
+Score	Errors	Function
+ 1.0	0	bitNor
+ 2.0	0	bitXor
+ 2.0	0	isNotEqual
+ 2.0	0	getByte
+ 2.0	0	copyLSB
+ 3.0	0	logicalShift
+ 0.0	18	bitCount
+ 4.0	0	bang
+ 4.0	0	leastBitPos
+ 1.0	0	tmax
+ 3.0	0	isNonNegative
+ 0.0	15	isGreater
+ 2.0	0	divpwr2
+ 4.0	0	abs
+ 0.0	232	addOK
+Total points: 30.00/40.00
+
+Part 2: Compilation Results for Performance Score
+
+Results of running 'dlc -Z bits.c':
+Results of compiling btest:
+gcc -O -Wall -m32 -o btest bits.c btest.c decl.c tests.c
+
+
+Part 3: Performance Tests (functions with invalid operations are disabled)
+
+
+Results of running 'btest -g -r 2':
+Team: sen19001+bau15011+jam18007
+Member 1:	Ezra	sen19001
+Member 2:	Thomas+Dawson	jam18007+bau15011
+
+Score	Errors	Function
+ 2.0	0	bitNor
+ 2.0	0	bitXor
+ 2.0	0	isNotEqual
+ 2.0	0	getByte
+ 2.0	0	copyLSB
+ 2.0	0	logicalShift
+ 0.0	18	bitCount
+ 2.0	0	bang
+ 2.0	0	leastBitPos
+ 2.0	0	tmax
+ 2.0	0	isNonNegative
+ 0.0	15	isGreater
+ 2.0	0	divpwr2
+ 2.0	0	abs
+ 0.0	232	addOK
+Total points: 24.00/30.00
+
+
+Part 4: Grade
+
+Correctness: 		     / 40
+
+Performance: 		     / 30
+
+Coding Style:		     / 5
+
+             		__________
+
+Total:       		     / 75
+
+Part 5: Original ./handin/sen19001.c file
+
+/***********************************************************************
+* Program:
+*    Lab Datalab
+*    Brother Allred, ECEN 324
+* Author:
+*    Ezra Senanu
+* Summary:
+*    This program is to help understand bit-level representations and 
+*    manipulations in C language.
+***********************************************************************/
+
+/* 
+ * CS:APP Data Lab 
+ * 
+ * bits.c - Source file with your solutions to the Lab.
+ *          This is the file you will hand in to your instructor.
+ *          Even though you may work as a team, all students should
+ *          individually submit a solution.
+ *
+ * WARNING: Do not include the <stdio.h> header; it confuses the dlc
+ * compiler. You can still use printf for debugging without including
+ * <stdio.h>, although you might get a compiler warning. In general,
+ * it's not good practice to ignore compiler warnings, but in this
+ * case it's OK.  
+ */
+
+#include "btest.h"
+#include <limits.h>
+
+/*
+ * Instructions to Students:
+ *
+ * STEP 1: Fill in the following struct with your identifying info.
+ */
+team_struct team =
+{
+   /* Team name: Replace with either:
+      Your login ID (Linux Lab username) if working as a one person team
+      or, ID1+ID2 where ID1 is the login ID of the first team member
+      and ID2 is the login ID of the second team member.
+       Example: joestudent+zmename */
+    "sen19001+bau15011+jam18007", 
+   /* Student name 1: Replace with the name of first team member */
+   "Ezra",
+   /* Login ID 1: Replace with the login ID of first team member */
+   "sen19001",
+
+   /* The following should only be changed if there are two team members */
+   /* Student name 2: Name of the second team member */
+   "Thomas+Dawson",
+   /* Login ID 2: Login ID of the second team member */
+   "jam18007+bau15011"
+};
+
+#if 0
+/*
+ * STEP 2: Read the following instructions carefully.
+ */
+
+You will provide your solution to the Data Lab by
+editing the collection of functions in this source file.
+
+CODING RULES:
+ 
+  Replace the "return" statement in each function with one
+  or more lines of C code that implements the function. Your code 
+  must conform to the following style:
+ 
+  int Funct(arg1, arg2, ...) {
+      /* brief description of how your implementation works */
+      int var1 = Expr1;
+      ...
+      int varM = ExprM;
+
+      varJ = ExprJ;
+      ...
+      varN = ExprN;
+      return ExprR;
+  }
+
+  Note that in order to make the dlc (data lab checker) happy you need
+  to declare all variables at the first of the function.
+      dlc happy with:                 dlc not happy with:
+      ---------------                 -------------------
+      int Funct( arg1, arg2) {          int Funct( arg1, arg2) {
+         int varA = ~0;                    int varA = ~0;
+         int varB = 1;                     varA = varA + 4;
+         varA = varA + 4;                  int varB = 1;
+          ...                               ...
+
+  Each "Expr" is an expression using ONLY the following:
+  1. Integer constants 0 through 255 (0xFF), inclusive. You are
+      not allowed to use big constants such as 0xffffffff.
+     NOTE: You may create big constants using code.  
+  2. Function arguments and local variables (no global variables).
+  3. Unary integer operations ! ~
+  4. Binary integer operations & ^ | + << >>
+    
+  Some of the problems restrict the set of allowed operators even further.
+  Each "Expr" may consist of multiple operators. You are not restricted to
+  one operator per line.
+
+  You are expressly forbidden to:
+  1. Use any control constructs such as if, do, while, for, switch, etc.
+  2. Define or use any macros.
+  3. Define any additional functions in this file.
+     NOTE: You may define additional functions while you are working to
+           solve the problems, but the final submission should not have any.
+  4. Call any functions.
+  5. Use any other operations, such as &&, ||, -, or ?:
+  6. Use any form of casting.
+ 
+  You may assume that your machine:
+  1. Uses 2s complement, 32-bit representations of integers.
+  2. Performs right shifts arithmetically.
+  3. Has unpredictable behavior when shifting an integer by more
+     than the word size.
+
+EXAMPLES OF ACCEPTABLE CODING STYLE:
+  /*
+   * pow2plus1 - returns 2^x + 1, where 0 <= x <= 31
+   */
+  int pow2plus1(int x) {
+     /* exploit ability of shifts to compute powers of 2 */
+     return (1 << x) + 1;
+  }
+
+  /*
+   * pow2plus4 - returns 2^x + 4, where 0 <= x <= 31
+   */
+  int pow2plus4(int x) {
+     /* exploit ability of shifts to compute powers of 2 */
+     int result = (1 << x);
+     result += 4;
+     return result;
+  }
+
+
+NOTES:
+  1. Use the dlc (data lab checker) compiler (described in the handout) to 
+     check the legality of your solutions.
+  2. Each function has a maximum number of operators (! ~ & ^ | + << >>)
+     that you are allowed to use for your implementation of the function. 
+     The max operator count is checked by dlc. Note that '=' is not 
+     counted; you may use as many of these as you want without penalty.
+  3. Use the btest test harness to check your functions for correctness.
+  4. The maximum number of ops for each function is given in the
+     header comment for each function. If there are any inconsistencies 
+     between the maximum ops in the writeup and in this file, consider
+     this file the authoritative source.
+#endif
+
+/*
+ * STEP 3: Modify the following functions according the coding rules.
+ * 
+ *   IMPORTANT. TO AVOID GRADING SURPRISES:
+ *   1. Use the dlc compiler to check that your solutions conform
+ *      to the coding rules.
+ *   2. Use the btest test harness to check that your solutions produce 
+ *      the correct answers. Watch out for corner cases around Tmin and Tmax.
+ */
+/* Copyright (C) 1991-2018 Free Software Foundation, Inc.
+   This file is part of the GNU C Library.
+
+   The GNU C Library is free software; you can redistribute it and/or
+   modify it under the terms of the GNU Lesser General Public
+   License as published by the Free Software Foundation; either
+   version 2.1 of the License, or (at your option) any later version.
+
+   The GNU C Library is distributed in the hope that it will be useful,
+   but WITHOUT ANY WARRANTY; without even the implied warranty of
+   MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+   Lesser General Public License for more details.
+
+   You should have received a copy of the GNU Lesser General Public
+   License along with the GNU C Library; if not, see
+   <http://www.gnu.org/licenses/>.  */
+/* This header is separate from features.h so that the compiler can
+   include it implicitly at the start of every compilation.  It must
+   not itself include <features.h> or any other header that includes
+   <features.h> because the implicit include comes before any feature
+   test macros that may be defined in a source file before it first
+   explicitly includes a system header.  GCC knows the name of this
+   header in order to preinclude it.  */
+/* glibc's intent is to support the IEC 559 math functionality, real
+   and complex.  If the GCC (4.9 and later) predefined macros
+   specifying compiler intent are available, use them to determine
+   whether the overall intent is to support these features; otherwise,
+   presume an older compiler has intent to support these features and
+   define these macros by default.  */
+/* wchar_t uses Unicode 10.0.0.  Version 10.0 of the Unicode Standard is
+   synchronized with ISO/IEC 10646:2017, fifth edition, plus
+   the following additions from Amendment 1 to the fifth edition:
+   - 56 emoji characters
+   - 285 hentaigana
+   - 3 additional Zanabazar Square characters */
+/* 
+ * bitNor - ~(x|y) using only ~ and & 
+ *   Example: bitNor(0x6, 0x5) = 0xFFFFFFF8
+ *   Legal ops: ~ &
+ *   Max ops: 8
+ *   Rating: 1
+ */
+int bitNor(int x, int y) {
+    //apply ~ to both x and y
+    int notx = ~x;
+    int noty = ~y;
+    int b = notx & noty;
+    return (b);
+}
+/* 
+ * bitXor - x^y using only ~ and & 
+ *   Example: bitXor(4, 5) = 1
+ *   Legal ops: ~ &
+ *   Max ops: 14
+ *   Rating: 2
+ */
+int bitXor(int x, int y) {
+    int xor = ~(~x & ~y) & ~(x & y); //apply the nots and & to execute the nor bit
+    return (xor);
+}
+/* 
+ * isNotEqual - return 0 if x == y, and 1 otherwise 
+ *   Examples: isNotEqual(5,5) = 0, isNotEqual(4,5) = 1
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 6
+ *   Rating: 2
+ */
+int isNotEqual(int x, int y) {
+    int noteq = !!(x^y);
+    return (noteq);
+}
+/* 
+ * getByte - Extract byte n from word x
+ *   Bytes numbered from 0 (LSB) to 3 (MSB)
+ *   Examples: getByte(0x12345678,1) = 0x56
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 6
+ *   Rating: 2
+ */
+int getByte(int x, int n) {
+    return (x >> (n << 3)) & 0xFF;
+}
+/* 
+ * copyLSB - set all bits of result to least significant bit of x
+ *   Example: copyLSB(5) = 0xFFFFFFFF, copyLSB(6) = 0x00000000
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 5
+ *   Rating: 2
+ */
+int copyLSB(int x) {
+    int cp = (x << 31) >> 31;
+    return cp;
+}
+/* 
+ * logicalShift - shift x to the right by n, using a logical shift
+ *   Can assume that 1 <= n <= 31
+ *   Examples: logicalShift(0x87654321,4) = 0x08765432
+ *   Legal ops: ~ & ^ | + << >>
+ *   Max ops: 16
+ *   Rating: 3 
+ */
+int logicalShift(int x, int n) {
+    int logsh = (x >> n) & ~(((1 << 31) >> n) << 1); 
+    return logsh;
+}
+/*
+ * bitCount - returns count of number of 1's in word
+ *   Examples: bitCount(5) = 2, bitCount(7) = 3
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 40
+ *   Rating: 4
+ */
+int bitCount(int x) {
+    // Create mask to count bits in stages
+    int mask1 = 0x55 | (0x55 << 8);
+    int mask2 = 0x33 | (0x33 << 8);
+    int mask3 = 0x0F | (0x0F << 8);
+    int mask4 = 0xFF | (0xFF << 16);
+    int mask5 = 0xFF | (0xFF << 8);
+    //Apply mask and add count
+    x = (x & mask1) + ((x >> 1) & mask1);
+    x = (x & mask2) + ((x >> 2) & mask2);
+    x = (x & mask3) + ((x >> 4) & mask3);
+    x = (x & mask4) + ((x >> 8) & mask4);
+    x = (x & mask5) + ((x >> 16) & mask5);
+    return x;
+}
+/* 
+ * bang - Compute !x without using !
+ *   Examples: bang(3) = 0, bang(0) = 1
+ *   Legal ops: ~ & ^ | + << >>
+ *   Max ops: 12
+ *   Rating: 4 
+ */
+int bang(int x) {
+   // Combine x and its negation, and shift right by 31 to get either 0 or 1
+    int ba = ((x | (~x + 1)) >> 31) + 1; 
+    return ba;
+}
+/* 
+ * leastBitPos - return a mask that marks the position of the
+ *               least significant 1 bit. If x == 0, return 0
+ *   Example: leastBitPos(96) = 0x20
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 6
+ *   Rating: 4 
+ */
+int leastBitPos(int x) {
+   //isolate the least significant 1bit
+    int lbp = x & (~x + 1);
+    return lbp;
+}
+/* 
+ * TMax - return maximum two's complement integer 
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 4
+ *   Rating: 1
+ */
+int tmax(void) {
+    // Shift 1 to the leftmost bit and invert all bits
+    int tm = ~(1 << 31);
+    return tm;
+}
+/* 
+ * isNonNegative - return 1 if x >= 0, return 0 otherwise 
+ *   Example: isNonNegative(-1) = 0.  isNonNegative(0) = 1.
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 6
+ *   Rating: 3
+ */
+int isNonNegative(int x) {
+   //Shift x right by 31 to check the sign 
+    int inn = !(x >> 31);
+    return inn;
+}
+/* 
+ * isGreater - if x > y  then return 1, else return 0 
+ *   Example: isGreater(4,5) = 0, isGreater(5,4) = 1
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 24
+ *   Rating: 3
+ */
+int isGreater(int x, int y) {
+     // Get the sign bits of x and y
+    int sign_x = (x >> 31) & 1;
+    int sign_y = (y >> 31) & 1;
+    // Determine if x is greater than y
+    int ig = ((~sign_x & sign_y) | (!((x + ~y + 1) >> 31) & !(sign_x ^ sign_y))) & 1;
+    return ig;
+}
+/* 
+ * divpwr2 - Compute x/(2^n), for 0 <= n <= 30
+ *  Round toward zero
+ *   Examples: divpwr2(15,1) = 7, divpwr2(-33,4) = -2
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 15
+ *   Rating: 2
+ */
+int divpwr2(int x, int n) {
+   // Add bias to x and then shift right by n bits
+    int mask = (1 << n) + ~0;
+    int bias = (x >> 31) & mask;
+    int dpw = (x + bias) >> n;   
+    return dpw;
+}
+/* 
+ * abs - absolute value of x (except returns TMin for TMin)
+ *   Example: abs(-1) = 1.
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 10
+ *   Rating: 4
+ */
+int abs(int x) {
+   // Compute absolute value using conditional negation
+    int sign = x >> 31;
+    int abs = (x ^ sign) + (~sign + 1);
+    return abs;
+}
+/* 
+ * addOK - Determine if can compute x+y without overflow
+ *   Example: addOK(0x80000000,0x80000000) = 0,
+ *            addOK(0x80000000,0x70000000) = 1, 
+ *   Legal ops: ! ~ & ^ | + << >>
+ *   Max ops: 20
+ *   Rating: 3
+ */
+int addOK(int x, int y) {
+    int sum = x + y;
+    int sign_x = x >> 31;
+    int sign_y = y >> 31;
+    int sign_sum = sum >> 31;
+   // Check if the sign of the sum is different from the signs of x and y
+    int ado = !((sign_x ^ sign_y) & (sign_x ^ sign_sum));
+    return ado;
+}

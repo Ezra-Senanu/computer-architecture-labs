@@ -1,0 +1,390 @@
+==========================  Filename:  ==========================
+  Name: sen19001.c
+
+
+=========================  Compiling:  ==========================
+  No warnings or errors while compiling. That's a good sign! :)
+
+
+==========================  Running:  ===========================
+  The "Enter number:" prompt correctly printed to stderr. :)
+  No warnings or errors while running. That's a good sign! :)
+
+
+===================  Result of diff command:  ===================
+  Uh oh! Differences detected.
+  Use the grading notes in I-Learn to adjust your score.
+  Lines from your code start with <. Solution lines start with >.
+  To help you see any potential whitespace differences:
+    - tabs are shown as ^I
+    - the end of the line is shown as $.
+  Here are the detected differences:
+
+2c2$
+< 3.141593$
+---$
+> 3.14159$
+4,6c4,6$
+< Users pay rate: $10.50$
+< Hours worked: 40$
+< Gross Pay: $420.00$
+---$
+> Users pay rate: $10.5$
+>  Hours worked: 40$
+>     Gross Pay: $420$
+13,18c13,18$
+< Float: 43.2 ###$
+< Float:       43.2 ###$
+< Float:      43.20 ###$
+< Float: 43.200 ###$
+< Float:     43.200 ###$
+< Float: 43.2000    ###$
+---$
+>   Float: 43.2 ###$
+>   Float: 43.2       ###$
+>   Float:      43.20 ###$
+>   Float: 43.200 ###$
+>   Float:     43.200 ###$
+>   Float: 43.2000    ###$
+20c20$
+< ^IOct^IDec^IHex^IChar$
+---$
+> ^IOct   Dec   Hex   Char$
+22,53c22,48$
+< ^I215^I141^I8d^IM-^M$
+< ^I216^I142^I8e^IM-^N$
+< ^I217^I143^I8f^IM-^O$
+< ^I220^I144^I90^IM-^P$
+< ^I221^I145^I91^IM-^Q$
+< ^I222^I146^I92^IM-^R$
+< ^I223^I147^I93^IM-^S$
+< ^I224^I148^I94^IM-^T$
+< ^I225^I149^I95^IM-^U$
+< ^I226^I150^I96^IM-^V$
+< ^I227^I151^I97^IM-^W$
+< ^I230^I152^I98^IM-^X$
+< ^I231^I153^I99^IM-^Y$
+< ^I232^I154^I9a^IM-^Z$
+< ^I233^I155^I9b^IM-^[$
+< ^I234^I156^I9c^IM-^\$
+< ^I235^I157^I9d^IM-^]$
+< ^I236^I158^I9e^IM-^^$
+< ^I237^I159^I9f^IM-^_$
+< ^I240^I160^Ia0^IM- $
+< ^I241^I161^Ia1^IM-!$
+< ^I242^I162^Ia2^IM-"$
+< ^I243^I163^Ia3^IM-#$
+< ^I244^I164^Ia4^IM-$$
+< ^I245^I165^Ia5^IM-%$
+< ^I246^I166^Ia6^IM-&$
+< ^I247^I167^Ia7^IM-'$
+< ^I250^I168^Ia8^IM-($
+< ^I251^I169^Ia9^IM-)$
+< ^I252^I170^Iaa^IM-*$
+< ^I253^I171^Iab^IM-+$
+< ^I254^I172^Iac^IM-,$
+---$
+> ^I141   97    61    a$
+> ^I142   98    62    b$
+> ^I143   99    63    c$
+> ^I144   100   64    d$
+> ^I145   101   65    e$
+> ^I146   102   66    f$
+> ^I147   103   67    g$
+> ^I150   104   68    h$
+> ^I151   105   69    i$
+> ^I152   106   6a    j$
+> ^I153   107   6b    k$
+> ^I154   108   6c    l$
+> ^I155   109   6d    m$
+> ^I156   110   6e    n$
+> ^I157   111   6f    o$
+> ^I160   112   70    p$
+> ^I161   113   71    q$
+> ^I162   114   72    r$
+> ^I163   115   73    s$
+> ^I164   116   74    t$
+> ^I165   117   75    u$
+> ^I166   118   76    v$
+> ^I167   119   77    w$
+> ^I170   120   78    x$
+> ^I171   121   79    y$
+> ^I172   122   7a    z$
+> $
+
+
+=============  Checking other code requirements:  ===============
+
+  According to the script, it looks like you used a loop and
+   incremented variables that were formatted to create each row in
+   the table. (If so, that's good! However, you should verify.)
+
+  Uh oh! The "Summary" in the header wasn't updated (-1 on Style).
+  Uh oh! The comment above "main" wasn't updated (-0.5 on Style).
+
+  To Do: Double check that you used "malloc()" exactly twice.
+  Each time you used "malloc()" should appear below:
+   p1 = (int*)malloc(sizeof(int));
+   p1 = (int*)malloc(sizeof(int));
+  This script found 2 time(s) that you used "malloc()". Good! Please verify.
+
+  To Do: Double check that you used "free()" twice (once for each malloc).
+  Each time you used "free()" should appear below:
+   free(p1);
+   free(p2);
+  This script found 2 time(s) that you used "free()". Good! Please verify.
+
+  Uh oh! It looks like the addresses returned by malloc weren't checked against NULL.
+  You should verify this. (If so, apply -1 on Elegance.)
+
+  It appears that not all C++ comments were updated for the C version (-1.5 Style):
+   // The setw() manipulator takes effect only for the next output object.
+   // The setw() manipulator takes effect only for the next output object.
+   // The float object is left justified in the field because the setiosflags()
+
+=========================  Scoresheet: ==========================
+This is where you will score yourself using the CANVAS DocViewer
+according to the instructions given in our next class.
+Under each section, highlight anything that applies to your file.
+Also, add comments to your code (at the end of this file).
+
+o = good things
+X = bad things
+(Highlight the options below that apply to your code.)
+
+  TOTAL SCORE  __________ / 50
+
+    STYLE __________ / 10
+
+        o Properly commented
+        X Insufficiently commented
+          - "descriptive text" was not updated
+          - comments still describe C++ code, e.g. setw()
+        o Proper indentation
+        X Inconsistent indentation
+        o Meaningful variable names and variables properly named
+        X Spelling and grammar errors
+
+    PROGRAM CORRECTNESS __________ / 20
+
+      Compiling and running: 
+        o Code compiles
+        X Does not compile
+        o Code runs successfully
+        X Code crashes (e.g., causes seg fault)
+
+      Output of program:
+        o No differences shown with diff command 
+        X Incorrect output identified with diff command
+          - whitespace issues (tabs, spaces)
+          - digits of precision
+        X Integer outputs didn't match
+        X Float outputs didn't match
+        X Pointer outputs didn't match
+        X Other outputs didn't match
+
+      User prompt to correct output stream:
+        o For "Enter number" prompt, uses fprintf with stderr
+        X The "Enter number" prompt didn't go to stderr
+
+    ELEGANCE __________ / 20
+
+      Table:
+        o Loop used to print each line of table
+        X Each line of table was hard coded in the code
+        o Used %o %d %x %c for formating a single value different ways
+        X Different bases/codes were hardcoded or less elegant
+
+      Memory allocation:
+        o Checked return value on malloc()
+          - Provided a warning message if null pointer returned
+          - Exited program if null pointer returned
+        X Used allocated memory without checking if null pointer
+        o Used free to free up allocated memory
+        X Didn't free up allocated memory at end
+
+      Other:
+        o Implements requirements listed in assignment sheet
+        o Uses field width and left justification
+        o No unnecessary code
+
+
+================ Student's submitted source code:  ==============
+  Using the DocViewer, add comments to your code below.
+
+
+/***********************************************************************
+* Program:
+*    Lab C_lab, ECEN 324 Learning C Lab
+*    Brother Allred, ECEN 324
+* Author:
+*    Your Name
+* Summary:
+*    Descriptive text ...
+************************************************************************/
+
+#include <stdio.h>
+#include <stdlib.h>
+
+#define PI 3.1415926
+
+/***********************************************************************
+* descriptive text goes here
+***********************************************************************/
+int main (void)
+{
+   // Printing various items
+ 
+   const char LETTER = 'A';
+   printf("%d\n", 24);
+   printf("%.6f\n", PI);
+   printf("%c\n",LETTER);
+ 
+   float payRate = 10.50;
+   int hours = 40;
+ 
+   printf("Users pay rate: $%.2f\n", payRate); 
+   printf("Hours worked: %d\n", hours);
+   printf("Gross Pay: $%.2f\n", hours * payRate);
+ 
+   int number;
+   fprintf(stderr, "Enter number: ");
+   scanf("%d", &number);
+   printf("Twice %d is %d\n", number, number * 2);
+ 
+   /*********************************************************************/
+   /*********************** Output an Integer ***************************/
+   /*********************************************************************/
+   int anInt = 99;
+   float aFloat = 43.2;
+   // Output the integer with the default formatting.
+   //
+   printf("\nInteger: %d ###\n", anInt);                      // output a blank line
+
+ 
+   // Output the integer in a fixed field width of 10.
+   // The setw() manipulator takes effect only for the next output object.
+   // The object will be right justified in the field.
+   //
+   printf("Integer: %10d ###\n", anInt);
+ 
+   // Output the integer in a fixed field width of 10
+   // and left justified in the field.
+   //
+   printf("Integer: %-10d ###\n\n", anInt);
+ 
+   
+   /*********************************************************************/
+   /************************* Output a Float ****************************/
+   /*********************************************************************/
+ 
+   // Output the float with the default formatting.
+   //
+   printf("Float: %.1f ###\n", aFloat);
+ 
+   // Output the float in a fixed field width of 10.
+   // The setw() manipulator takes effect only for the next output object.
+   // The float object is left justified in the field because the setiosflags()
+   // done previously is still in effect.
+   //
+   printf("Float: %10.1f ###\n", aFloat);
+
+ 
+   // Output the float right justified in a field width of 10 with  
+   // a precision of 2 places after the decimal point for the float. 
+   //
+   printf("Float: %10.2f ###\n", aFloat);
+ 
+   // Output the float with 3 places of precision after the decimal point but
+   // not giving a field width.
+   //
+   printf("Float: %.3f ###\n", aFloat);
+ 
+   // Output the float with 3 places of precision after the decimal point with
+   // a field width of 10.  The other flags set above are still in effect.
+   //
+   printf("Float: %10.3f ###\n", aFloat);
+  
+   // Output the float with 4 places of precision after the decimal point with 
+   // a field width of 10 and left justify the number.
+   //
+   printf("Float: %-10.4f ###\n\n", aFloat);
+
+
+   // Output a Table
+    printf("\tOct\tDec\tHex\tChar\n");
+    printf("\t----------------------\n");
+    for (int i = 141; i <= 172; i++) {
+        printf("\t%o\t%d\t%x\t%c\n", i, i, i, i);
+    }
+ 
+
+   /*********************************************************************
+    *************** Create some code to output a table ******************
+    *********************************************************************
+ 
+    * The following table has a leading tab.
+ 
+        Oct   Dec   Hex   Char
+        ----------------------
+        141   97    61    a
+        142   98    62    b
+        143   99    63    c
+        144   100   64    d
+        145   101   65    e
+        146   102   66    f
+        147   103   67    g
+        150   104   68    h
+        151   105   69    i
+        152   106   6a    j
+        153   107   6b    k
+        154   108   6c    l
+        155   109   6d    m
+        156   110   6e    n
+        157   111   6f    o
+        160   112   70    p
+        161   113   71    q
+        162   114   72    r
+        163   115   73    s
+        164   116   74    t
+        165   117   75    u
+        166   118   76    v
+        167   119   77    w
+        170   120   78    x
+        171   121   79    y
+        172   122   7a    z
+ 
+    *********************************************************************/
+ 
+   /*********************************************************************
+    *************** Now play with pointers to finish up *****************
+    *********************************************************************/
+ 
+   int *p1;
+   int *p2;
+ 
+   p1 = (int*)malloc(sizeof(int));
+   *p1 = 42;
+   p2 = p1;
+   printf("*p1 == %d\n", *p1);
+   printf("*p2 == %d\n", *p2);
+ 
+   *p2 = 53;
+   printf("*p1 == %d\n", *p1);
+   printf("*p2 == %d\n", *p2);
+ 
+   p1 = (int*)malloc(sizeof(int));
+   *p1 = 88;
+   printf("*p1 == %d\n", *p1);
+   printf("*p2 == %d\n", *p2);
+ 
+   printf("Hope you got the point of this example!\n");
+ 
+   free(p1);
+   free(p2);
+
+   return 0;
+}
+
+
+
